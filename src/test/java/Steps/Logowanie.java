@@ -35,6 +35,12 @@ public class Logowanie {
         System.out.println("Uzytkownik wpisuje poprawne hasło");
         driver.findElement(By.id("password")).sendKeys("SuperSecretPassword!");
     }
+
+    @When("Uzytkownik wpisuje niepoprawne password")
+    public void uzytkownik_wpisuje_niepooprawne_password() {
+        System.out.println("Uzytkownik wpisuje niepoprawne password");
+        driver.findElement(By.id("password")).sendKeys("niepoprawne");
+    }
     @When("Uzytkownik klika przycisk Login")
     public void uzytkownik_klika_przycisk_login() {
         System.out.println("Uzytkownik klika przycisk Login");
@@ -44,6 +50,13 @@ public class Logowanie {
     public void uzytkownik_zostaje_poprawnie_zalogowany() {
         System.out.println("Uzytkownik zostal poprawnie zalogowany");
         Assert.assertEquals("https://the-internet.herokuapp.com/secure",driver.getCurrentUrl());
+        driver.close();
+    }
+
+    @Then("Uzytkownik nie zostaje zalogowany")
+    public void uzytkownik_nie_zostaje_zalogowany() {
+        System.out.println("Uzytkownik nie zostaje zalogowany");
+        Assert.assertEquals("https://the-internet.herokuapp.com/login",driver.getCurrentUrl());
         driver.close();
     }
 }
