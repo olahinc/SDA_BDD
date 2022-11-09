@@ -10,4 +10,12 @@ Feature: Logowanie do aplikacji
     And Uzytkownik klika przycisk Login
     Then Uzytkownik zostaje poprawnie zalogowany
 
+  Scenario: Nieppprawne logowanie
+    Given Uzytkownik otwiera przegladarke
+    And Uzytkownik wpisuje adres https://the-internet.herokuapp.com/login
+    When Uzytkownik wpisuje poprawny username
+    And Uzytkownik wpisuje niepoprawne password
+    And Uzytkownik klika przycisk Login
+    Then Uzytkownik nie zostaje zalogowany
+
 
