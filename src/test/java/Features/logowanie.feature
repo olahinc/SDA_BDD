@@ -18,4 +18,20 @@ Feature: Logowanie do aplikacji
     And Uzytkownik klika przycisk Login
     Then Uzytkownik nie zostaje zalogowany
 
+  Scenario: Poprawne logowanie do aplikacji
+    Given Uzytkownik otwiera przegladarke
+    And Uzytkownik wpisuje adres "https://the-internet.herokuapp.com/login"
+    When Uzytkownik wpisuje "tomsmith" w pole username
+    And Uzytkownik wpisuje "SuperSecretPassword!" w pole password
+    And Uzytkownik klika przycisk Login
+    Then Uzytkownik zostaje poprawnie zalogowany
+
+  @now
+  Scenario: Miepoprawne logowanie do aplikacji (druga wersja)
+    Given Uzytkownik otwiera przegladarke
+    And Uzytkownik wpisuje adres "https://the-internet.herokuapp.com/login"
+    When Uzytkownik wpisuje "tomsmith" w pole username
+    And Uzytkownik wpisuje " " w pole password
+    And Uzytkownik klika przycisk Login
+    Then Uzytkownik zostaje poprawnie zalogowany
 

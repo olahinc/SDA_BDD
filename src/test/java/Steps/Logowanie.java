@@ -1,5 +1,6 @@
 package Steps;
 
+import io.cucumber.java.AfterAll;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -25,10 +26,27 @@ public class Logowanie {
         System.out.println("Uzytkownik wpisal adres strony internetowej");
         driver.navigate().to("https://the-internet.herokuapp.com/login");
     }
+    //Uzytkownik wpisuje adres "https://the-internet.herokuapp.com/login"
+    @Given("Uzytkownik wpisuje adres {string}")
+    public void uzytkownik_wpisuje_adres(String url) {
+    driver.navigate().to(url);
+
+    }
+    //Uzytkownik wpisuje "tomsmith" w pole username
+    @When("Uzytkownik wpisuje {string} w pole username")
+    public void uzytkownik_wpisuje_w_pole_username(String nazwaUzytkownika) {
+        driver.findElement(By.id("username")).sendKeys(nazwaUzytkownika);
+
+    }
     @When("Uzytkownik wpisuje poprawny username")
     public void uzytkownik_wpisuje_poprawny_username() {
         System.out.println("Uzytkownik wpisuje poprawny username");
         driver.findElement(By.id("username")).sendKeys("tomsmith");
+    }
+    //Uzytkownik wpisuje "SuperSecretPassword" w pole password
+    @When("Uzytkownik wpisuje {string} w pole password")
+    public void uzytkownik_wpisuje_w_pole_password(String haslo) {
+        driver.findElement(By.id("password")).sendKeys(haslo);
     }
     @When("Uzytkownik wpisuje pooprawny password")
     public void uzytkownik_wpisuje_pooprawny_password() {
@@ -50,7 +68,7 @@ public class Logowanie {
     public void uzytkownik_zostaje_poprawnie_zalogowany() {
         System.out.println("Uzytkownik zostal poprawnie zalogowany");
         Assert.assertEquals("https://the-internet.herokuapp.com/secure",driver.getCurrentUrl());
-        driver.close();
+        //driver.close();
     }
 
     @Then("Uzytkownik nie zostaje zalogowany")
@@ -59,4 +77,5 @@ public class Logowanie {
         Assert.assertEquals("https://the-internet.herokuapp.com/login",driver.getCurrentUrl());
         driver.close();
     }
+
 }
